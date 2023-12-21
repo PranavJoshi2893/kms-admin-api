@@ -1,15 +1,6 @@
 'use strict'
 require('dotenv').config();
 
-//database config
-const mongoose = require('mongoose');
-async function main() {
-    await mongoose.connect(process.env.MONGO_URI)
-}
-main().then(() => console.log(`[connected] database connected`))
-main().catch((err) => console.error(err));
-
-
 // server config
 const express = require('express');
 const PORT = process.env.PORT;
@@ -19,11 +10,19 @@ app.listen(PORT, HOST, () => {
     console.log(`[ready] http://${HOST}:${PORT}`);
 })
 
+//database config
+const mongoose = require('mongoose');
+async function main() {
+    await mongoose.connect(process.env.MONGO_URI)
+}
+main().then(() => console.log(`[connected] database connected`))
+main().catch((err) => console.error(err));
+
 
 //cors config
 const cors = require('cors');
 app.use(cors({
-    "origin": 'http://localhost:4200',
+    "origin": 'http://192.168.0.129:4200',
     "methods": 'GET,HEAD,PUT,PATCH,POST,DELETE',
     "preflightContinue": true,
     "optionsSuccessStatus": 204
