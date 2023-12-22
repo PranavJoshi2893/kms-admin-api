@@ -20,9 +20,10 @@ main().catch((err) => console.error(err));
 
 
 //cors config
+const ORIGIN_HOST = process.env.ORIGIN_HOST;
 const cors = require('cors');
 app.use(cors({
-    "origin": 'http://192.168.0.129:4200',
+    "origin": `http://${ORIGIN_HOST}:4200`,
     "methods": 'GET,HEAD,PUT,PATCH,POST,DELETE',
     "preflightContinue": true,
     "optionsSuccessStatus": 204
@@ -32,4 +33,4 @@ app.use(express.json());
 
 //endpoint connections
 const user_route = require('./modules/user/user_route');
-app.use('/api/v1',user_route);
+app.use('/api/v1', user_route);
